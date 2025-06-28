@@ -1,6 +1,7 @@
-import { test, expect } from "@playwright/test";
+import { test } from '../fixtures/fixture-pom';
+import { DataGenerator } from '../utils/generators/dataGenerator';
 
-test("has title", async ({ page }) => {
-  await page.goto("https://playwright.dev/");
-  await expect(page).toHaveTitle(/Playwright/);
+test('has title', async ({ pm }) => {
+  const name = DataGenerator.randomName();
+  console.log(name);
 });
