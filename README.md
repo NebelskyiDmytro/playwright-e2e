@@ -37,10 +37,6 @@ npx playwright show-report
 
 ## 📁 Project Structure
 
-- `api/` — API test helpers and request logic (expand as needed for API testing)
-- `components/` — Reusable UI component abstractions for POM (expand as needed)
-- `config/` — Configuration files and environment settings
-- `data/` — Static or seed data for tests
 - `factory/`
   - `UserFactory.ts` — Factory for generating user test data
 - `fixtures/`
@@ -61,6 +57,5 @@ npx playwright show-report
   - `generators/`
     - `dataGenerator.ts` — Utility for generating random or dynamic test data
 - `package.json` — Project dependencies and scripts
-- `README.md` — Project documentation (this file)
 
 ---
