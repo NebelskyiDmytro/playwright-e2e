@@ -1,11 +1,11 @@
 // api/placeholder.api.ts
-import { Post } from '../types/types/post.d';
+import { Post } from '../types/interfaces/post';
 
 export class PlaceholderAPI {
   baseUrl = 'BASE_URL';
 
-  async getPost(id: number): Promise<Post> {
-    const res = await fetch(`${this.baseUrl}/posts/${id}`);
+  async getSomething(id: number): Promise<Post> {
+    const res = await fetch(`${this.baseUrl}/something/${id}`);
     return await res.json();
   }
 }

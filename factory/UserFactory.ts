@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { IUser } from '../types/user';
+import { IUser } from '../types/interfaces/user';
 
 export class UserFactory {
   static create(overrides: Partial<IUser> = {}): IUser {
