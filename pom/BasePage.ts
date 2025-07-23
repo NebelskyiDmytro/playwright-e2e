@@ -1,4 +1,6 @@
-import { expect, Locator, Page } from "@playwright/test";
+import { expect, Locator, Page } from '@playwright/test';
+import chalk from 'chalk';
+import { TIMEOUTS } from '../config/timeouts';
 
 export class BasePage {
   readonly page: Page;
@@ -7,28 +9,25 @@ export class BasePage {
     this.page = page;
   }
 
-  async waitForPageReady(
-    timeout: number = 10000,
-    waitForIdle: boolean = false
-  ): Promise<void> {
-    await this.page.waitForLoadState("domcontentloaded", { timeout });
+  async waitForPageReady(timeout: number = TIMEOUTS.PAGE_LOAD, waitForIdle: boolean = false): Promise<void> {
+    await this.page.waitForLoadState('domcontentloaded', { timeout });
     if (waitForIdle) {
-      await this.page.waitForLoadState("networkidle", { timeout });
+      await this.page.waitForLoadState('networkidle', { timeout });
     }
   }
 
   async navigateTo(url: string, waitForIdle: boolean = false): Promise<void> {
-    console.log(`[Navigation] Going to ${url}`);
+    console.log(`[Navigation] Opening URL: ${chalk.blue(url)}`);
     await this.page.goto(url);
-    await this.waitForPageReady(10000, waitForIdle);
+    await this.waitForPageReady(TIMEOUTS.PAGE_LOAD, waitForIdle);
   }
 
   async scrollTo(locator: Locator): Promise<void> {
     await locator.scrollIntoViewIfNeeded();
   }
 
-  async assertTextVisible(text: string): Promise<void> {
-    await expect(this.page.getByText(text, { exact: true })).toBeVisible();
+  async assertTextVisible(text: string, exact: boolean = true): Promise<void> {
+    await expect(this.page.getByText(text, { exact })).toBeVisible();
   }
 
   async assertUrlContains(partial: string): Promise<void> {
@@ -36,6 +35,6 @@ export class BasePage {
   }
 
   async getText(locator: Locator): Promise<string> {
-    return (await locator.textContent()) || "";
+    return (await locator.textContent()) || '';
   }
 }
