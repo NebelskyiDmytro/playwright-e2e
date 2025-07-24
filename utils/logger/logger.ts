@@ -16,4 +16,8 @@ export class Logger {
   static debug(message: string) {
     console.debug(chalk.green(`[DEBUG]`), message);
   }
+
+  static navigation(url: string) {
+    console.log(`[Navigation] Opening URL: ${chalk.blue(url)}`);
+  }
 }

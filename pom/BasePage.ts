@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
-import chalk from 'chalk';
 import { TIMEOUTS } from '../config/timeouts';
+import { Logger } from '../utils/logger/logger';
 
 export class BasePage {
   readonly page: Page;
@@ -17,7 +17,7 @@ export class BasePage {
   }
 
   async navigateTo(url: string, waitForIdle: boolean = false): Promise<void> {
-    console.log(`[Navigation] Opening URL: ${chalk.blue(url)}`);
+    Logger.navigation(url);
     await this.page.goto(url);
     await this.waitForPageReady(TIMEOUTS.PAGE_LOAD, waitForIdle);
   }
@@ -27,11 +27,30 @@ export class BasePage {
   }
 
   async assertTextVisible(text: string, exact: boolean = true): Promise<void> {
-    await expect(this.page.getByText(text, { exact })).toBeVisible();
+    try {
+      await expect(this.page.getByText(text, { exact })).toBeVisible();
+    } catch (error) {
+      Logger.error(`Text not visible: ${text}`);
+      throw error;
+    }
+  }
+
+  async assertElementContainsText(locator: Locator, text: string): Promise<void> {
+    try {
+      await expect(locator).toContainText(text);
+    } catch (error) {
+      Logger.error(`Element does not contain text: ${text}`);
+      throw error;
+    }
   }
 
   async assertUrlContains(partial: string): Promise<void> {
-    await expect(this.page).toHaveURL(new RegExp(partial));
+    try {
+      await expect(this.page).toHaveURL(new RegExp(partial));
+    } catch (error) {
+      Logger.error(`URL does not contain: ${partial}`);
+      throw error;
+    }
   }
 
   async getText(locator: Locator): Promise<string> {
