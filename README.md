@@ -1,18 +1,26 @@
-# Playwright Sample E2E & API Framework
+<div align="left">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" height="40" alt="typescript logo"  />
+  <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" height="40" alt="docker logo"  />
+  <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/eslint/eslint-original.svg" height="40" alt="eslint logo"  />
+</div>
+
+###
+
+# Playwright E2E & API Framework
 
 A minimal, modular Playwright framework for end-to-end (E2E) browser automation and API testing. Designed for scalability, maintainability, and ease of use.
 
 ---
 
 ## 📦 Features
-- E2E browser automation with Playwright
-- API testing support
-- Page Object Model (POM) structure
+- Page Object Model (POM) structure ready to use
+- API placeholder and datatypes
 - Test data generation utilities
 - Factory pattern for test data
 - Fixtures for test setup
-- Parallel test execution
-- HTML reporting
+- HTML, Allure reporting
 
 ---
 
