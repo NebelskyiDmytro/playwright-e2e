@@ -6,15 +6,19 @@ export class Logger {
   }
 
   static warn(message: string) {
-    console.warn(chalk.yellow(`[WARN]`), message);
+    console.log(chalk.yellow(`[WARN]`), message);
   }
 
   static error(message: string) {
-    console.error(chalk.red(`[ERROR]`), message);
+    console.log(chalk.red(`[ERROR]`), message);
   }
 
   static debug(message: string) {
-    console.debug(chalk.green(`[DEBUG]`), message);
+    console.log(chalk.green(`[DEBUG]`), message);
+  }
+
+  static log(message: string) {
+    console.log(chalk.cyan(`[LOG]`), message);
   }
 
   static navigation(url: string) {
