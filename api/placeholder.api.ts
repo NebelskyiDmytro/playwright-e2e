@@ -6,6 +6,7 @@ export class PlaceholderAPI {
 
   async getSomething(id: number): Promise<Post> {
     const res = await fetch(`${this.baseUrl}/something/${id}`);
-    return await res.json();
+    const data = await res.json();
+    return data as Post;
   }
 }
