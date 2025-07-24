@@ -5,7 +5,13 @@
   "scripts": {
     "start": "ts-node",
     "build": "tsc",
-    "dev": "ts-node --watch"
+    "dev": "ts-node --watch",
+    "test": "playwright test",
+    "test:ui": "playwright test tests/UI/",
+    "test:api": "playwright test tests/API/",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "report": "playwright show-report"
   },
   "keywords": [],
   "author": "",
