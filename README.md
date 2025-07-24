@@ -4,7 +4,7 @@ A minimal, modular Playwright framework for end-to-end (E2E) browser automation 
 
 ---
 
-## 🚀 Features
+## 📦 Features
 - E2E browser automation with Playwright
 - API testing support
 - Page Object Model (POM) structure
