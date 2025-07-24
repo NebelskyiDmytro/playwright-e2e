@@ -31,7 +31,14 @@ export default defineConfig({
   projects: [
     {
       name: 'setup',
-      testMatch: /.*\.setup\.ts/,
+      testDir: './',
+      testMatch: 'global.setup.ts',
+      teardown: 'teardown',
+    },
+    {
+      name: 'teardown',
+      testDir: './',
+      testMatch: 'global.teardown.ts',
     },
     {
       name: 'chromium',

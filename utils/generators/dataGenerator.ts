@@ -32,11 +32,23 @@ export class DataGenerator {
     return faker.string.alphanumeric({ length });
   }
 
-  static generateDate(): string {
+  static generateRandomDate(): string {
     return faker.date.recent().toLocaleDateString('en-US', {
       year: 'numeric',
       month: '2-digit',
       day: '2-digit',
     });
   }
+
+  static getFormattedDate = (date: Date): string => {
+    return date.toLocaleString('en-US', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false,
+    });
+  };
 }
