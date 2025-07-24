@@ -2,7 +2,11 @@
   "name": "playwright-sample",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "start": "ts-node",
+    "build": "tsc",
+    "dev": "ts-node --watch"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -15,7 +19,8 @@
     "eslint": "^9.30.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.5.1",
-    "prettier": "^3.6.2"
+    "prettier": "^3.6.2",
+    "ts-node": "^10.9.2"
   },
   "dependencies": {
     "@faker-js/faker": "^9.8.0",

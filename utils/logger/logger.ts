@@ -18,6 +18,6 @@ export class Logger {
   }
 
   static navigation(url: string) {
-    console.log(`[Navigation] Opening URL: ${chalk.blue(url)}`);
+    console.log(`[Navigation] URL: ${chalk.blue(url)}`);
   }
 }

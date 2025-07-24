@@ -31,4 +31,12 @@ export class DataGenerator {
   static generateRandomPassword(length: number = 10): string {
     return faker.string.alphanumeric({ length });
   }
+
+  static generateDate(): string {
+    return faker.date.recent().toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    });
+  }
 }
