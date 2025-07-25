@@ -1,5 +1,40 @@
-import { test } from '../../fixtures/fixture-pom';
+import { test, expect, Page } from '@playwright/test';
+import { setupSharedPage, teardownSharedPage, getSharedPage } from '../../utils/runner/sharedPage';
 
-test('Simple test', async ({ pm }) => {
-  // TODO: Test steps
+let page: Page;
+const socials = ['linkedin', 'google', 'github'];
+
+test.beforeAll(async ({ browser }) => {
+  await setupSharedPage(browser, 'https://djinni.co/login');
+  page = getSharedPage();
+});
+
+test.afterAll(async () => {
+  await teardownSharedPage();
+});
+
+test.only('Verify email field', async () => {
+  await expect(page.locator('#email')).toBeVisible();
+  await page.locator('#email').fill('test@test.com');
+});
+
+test('Verify password field', async () => {
+  await expect(page.locator('#password')).toBeVisible();
+  await page.locator('#password').fill('test@test.com');
+});
+
+test('Verify title', async () => {
+  const title = await page.title();
+  expect(title).toBe('Увійти на Джин'.trim());
+});
+
+test('Verify header text', async () => {
+  await expect(page.locator('h1')).toBeVisible();
+  await expect(page.locator('h1')).toHaveText('Увійти на Джин');
+});
+
+socials.forEach((social) => {
+  test(`Verify login '${social}' button is visible`, async () => {
+    await expect(page.locator(`//button[@type='submit' and @value='${social}']`)).toBeVisible();
+  });
 });
