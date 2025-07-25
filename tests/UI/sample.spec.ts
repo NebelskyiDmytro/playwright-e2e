@@ -13,7 +13,7 @@ test.afterAll(async () => {
   await teardownSharedPage();
 });
 
-test.only('Verify email field', async () => {
+test('Verify email field', async () => {
   await expect(page.locator('#email')).toBeVisible();
   await page.locator('#email').fill('test@test.com');
 });
