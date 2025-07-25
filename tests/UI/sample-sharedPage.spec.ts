@@ -25,12 +25,12 @@ test('Verify password field', async () => {
 
 test('Verify title', async () => {
   const title = await page.title();
-  expect(title).toBe('Увійти на Джин'.trim());
+  expect(title).toBe('Log In to Djinni'.trim());
 });
 
 test('Verify header text', async () => {
   await expect(page.locator('h1')).toBeVisible();
-  await expect(page.locator('h1')).toHaveText('Увійти на Джин');
+  await expect(page.locator('h1')).toHaveText('Log In to Djinni');
 });
 
 socials.forEach((social) => {
