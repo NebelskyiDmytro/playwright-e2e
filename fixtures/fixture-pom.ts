@@ -7,6 +7,7 @@ export const test = base.extend<{
   pm: PageManager;
   page: BasePage;
 }>({
+  // Here we are creating a new instance of PageManager in order to simplify access to the POM
   pm: [
     async ({ page }, use) => {
       const pm = new PageManager(page);
@@ -16,6 +17,7 @@ export const test = base.extend<{
   ],
 
   page: async ({ page }, use) => {
+    // Here we are logging the browser console messages to the console
     if (process.env.LOG_CONSOLE === 'true') {
       page.on('console', (msg) => {
         switch (msg.type()) {
