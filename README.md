@@ -31,7 +31,7 @@ npm install
 
 ---
 
-## 🧪 Run Tests
+## 📌 Run Tests
 ```bash
 npx playwright test
 ```
@@ -67,3 +67,42 @@ npx playwright show-report
 - `package.json` — Project dependencies and scripts
 
 ---
+
+## 📑 Examples
+
+### POM fixture usage
+Page Object Model (POM) fixture is being create in order to reduce amount of code duplications and let engineer to reuse pages from one single instance of calling fixture in the test execution
+
+
+```javascript
+import { test } from '../../fixtures/fixture-pom';
+
+test('Simple test', async ({ pm }) => {
+  await pm.samplePage.goto()
+});
+```
+
+### Shared page state between executions
+Shared page stage design is designed to let engineer create single-runner suites with one shared context, since in Playwright each test with default page fixture will create new separate isolated context
+
+```javascript
+let page: Page;
+
+test.beforeAll(async ({ browser }) => {
+  await setupSharedPage(browser, 'URL');
+  page = getSharedPage();
+});
+
+test.afterAll(async () => {
+  await teardownSharedPage();
+});
+
+test.describe('Shared page suite', () => {
+  test('Test 1', async () => {
+    // Actions
+  });
+  test('Test 2', async () => {
+    // Actions
+  });
+});
+```
