@@ -18,27 +18,9 @@ export const test = base.extend<{
 
   page: async ({ page }, use) => {
     // Here we are logging the browser console messages to the console
-    if (process.env.LOG_CONSOLE === 'true') {
-      page.on('console', (msg) => {
-        switch (msg.type()) {
-          case 'error':
-            Logger.error(msg.text());
-            break;
-          case 'warning':
-            Logger.warn(msg.text());
-            break;
-          case 'info':
-            Logger.info(msg.text());
-            break;
-          case 'debug':
-            Logger.debug(msg.text());
-            break;
-          case 'log':
-            Logger.log(msg.text());
-            break;
-        }
-      });
-    }
+    Logger.setupConsoleHandler(page);
+    Logger.setupPageErrorHandler(page);
+    Logger.setupRequestFailedHandler(page);
     await use(page);
   },
 });
