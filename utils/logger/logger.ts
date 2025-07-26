@@ -27,6 +27,10 @@ export class Logger {
     console.log(`[${LogType.Navigation}] URL: ${chalk.blue(url)}`);
   }
 
+  /*
+   * @description Logs the browser console event
+   * @param page - The page object
+   */
   static setupConsoleHandler(page: Page) {
     if (process.env.LOG_BROWSER_CONSOLE === 'true') {
       page.on('console', (msg) => {
@@ -51,6 +55,12 @@ export class Logger {
     }
   }
 
+  /*
+   * @description Logs the page error event
+   * If the environment variable LOG_PAGE_ERROR is set to true, the page error event will be logged.
+   * If the environment variable THROW_PAGE_ERROR is set to true, the page error event will be thrown.
+   * @param page - The page object
+   */
   static setupPageErrorHandler(page: Page) {
     if (process.env.LOG_PAGE_ERROR === 'true') {
       page.on('pageerror', (exception) => {
@@ -64,6 +74,10 @@ export class Logger {
     }
   }
 
+  /*
+   * @description Logs the request failed event
+   * @param page - The page object
+   */
   static setupRequestFailedHandler(page: Page) {
     if (process.env.LOG_REQUEST_FAILED === 'true') {
       page.on('requestfailed', (request) => {
