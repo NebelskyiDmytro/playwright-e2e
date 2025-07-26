@@ -1,5 +1,4 @@
 import { expect, Locator, Page } from '@playwright/test';
-import { TIMEOUTS } from '../config/timeouts';
 import { Logger } from '../utils/logger/logger';
 
 export class BasePage {
@@ -9,17 +8,9 @@ export class BasePage {
     this.page = page;
   }
 
-  async waitForPageReady(timeout: number = TIMEOUTS.PAGE_LOAD, waitForIdle: boolean = false): Promise<void> {
-    await this.page.waitForLoadState('domcontentloaded', { timeout });
-    if (waitForIdle) {
-      await this.page.waitForLoadState('networkidle', { timeout });
-    }
-  }
-
-  async navigateTo(url: string, waitForIdle: boolean = false): Promise<void> {
+  async navigateTo(url: string, option: 'load' | 'domcontentloaded' | 'networkidle' | 'commit' = 'networkidle'): Promise<void> {
     Logger.navigation(url);
-    await this.page.goto(url);
-    await this.waitForPageReady(TIMEOUTS.PAGE_LOAD, waitForIdle);
+    await this.page.goto(url, { waitUntil: option as 'load' | 'domcontentloaded' | 'networkidle' | 'commit' });
   }
 
   async scrollTo(locator: Locator): Promise<void> {
