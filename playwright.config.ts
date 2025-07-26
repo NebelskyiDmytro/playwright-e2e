@@ -6,16 +6,15 @@ export default defineConfig({
   testDir: './tests',
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : 2,
-  reporter: [['allure-playwright'], ['html']],
+  workers: 1,
+  reporter: [['list'], ['allure-playwright'], ['html']],
+  timeout: 60000,
 
   expect: {
     timeout: 5000,
-
     toHaveScreenshot: {
       maxDiffPixels: 10,
     },
-
     toMatchSnapshot: {
       maxDiffPixelRatio: 0.1,
     },
@@ -25,7 +24,8 @@ export default defineConfig({
     // baseURL: 'http://localhost:3000',
     headless: process.env.CI ? true : false,
     trace: 'on',
-    screenshot: 'on',
+    screenshot: process.env.CI ? 'only-on-failure' : 'on',
+    video: process.env.CI ? 'retain-on-failure' : 'on',
   },
 
   projects: [

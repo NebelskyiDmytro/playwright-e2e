@@ -17,6 +17,30 @@ export class BasePage {
     await locator.scrollIntoViewIfNeeded();
   }
 
+    /**
+   * Returns a locator that finds elements containing specific text in the class name attribute.
+   *
+   * **Usage**
+   *
+   * For example, this method will find elements with class names containing "button" or "input" in the following DOM:
+   *
+   * ```html
+   * <button class="primary-button">Submit</button>
+   * <input class="text-input" type="text">
+   * <div class="container-wrapper">Content</div>
+   * ```
+   *
+   * ```js
+   * await page.getByClassName('button').click();
+   * await page.getByClassName('input').fill('text');
+   * ```
+   *
+   * @param text Text to locate the element for.
+   */
+  async getByPartialClass(className: string): Promise<Locator> {
+    return this.page.locator(`[class*="${className}"]`);
+  }
+
   async assertTextVisible(text: string, exact: boolean = true): Promise<void> {
     try {
       await expect(this.page.getByText(text, { exact })).toBeVisible();
