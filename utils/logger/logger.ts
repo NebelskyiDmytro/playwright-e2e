@@ -1,48 +1,49 @@
 import chalk from 'chalk';
 import { Page } from '@playwright/test';
+import { BrowseConsole, LogType } from '../../types/enums/logger';
 
 export class Logger {
   static info(message: string) {
-    console.log(chalk.blue(`[INFO]`), message);
+    console.log(chalk.blue(`[${LogType.Info}]`), message);
   }
 
   static warn(message: string) {
-    console.log(chalk.yellow(`[WARN]`), message);
+    console.log(chalk.yellow(`[${LogType.Warn}]`), message);
   }
 
   static error(message: string) {
-    console.log(chalk.red(`[ERROR]`), message);
+    console.log(chalk.red(`[${LogType.Error}]`), message);
   }
 
   static debug(message: string) {
-    console.log(chalk.green(`[DEBUG]`), message);
+    console.log(chalk.green(`[${LogType.Debug}]`), message);
   }
 
   static log(message: string) {
-    console.log(chalk.cyan(`[LOG]`), message);
+    console.log(chalk.cyan(`[${LogType.Log}]`), message);
   }
 
   static navigation(url: string) {
-    console.log(`[Navigation] URL: ${chalk.blue(url)}`);
+    console.log(`[${LogType.Navigation}] URL: ${chalk.blue(url)}`);
   }
 
   static setupConsoleHandler(page: Page) {
     if (process.env.LOG_BROWSER_CONSOLE === 'true') {
       page.on('console', (msg) => {
         switch (msg.type()) {
-          case 'error':
+          case BrowseConsole.Error:
             Logger.error(msg.text());
             break;
-          case 'warning':
+          case BrowseConsole.Warning:
             Logger.warn(msg.text());
             break;
-          case 'info':
+          case BrowseConsole.Info:
             Logger.info(msg.text());
             break;
-          case 'debug':
+          case BrowseConsole.Debug:
             Logger.debug(msg.text());
             break;
-          case 'log':
+          case BrowseConsole.Log:
             Logger.log(msg.text());
             break;
         }

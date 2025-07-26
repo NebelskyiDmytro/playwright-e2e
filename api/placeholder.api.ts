@@ -1,5 +1,5 @@
 // api/placeholder.api.ts
-import { Post } from '../types/interfaces/post';
+import { Post } from '../types/types/post';
 
 export class PlaceholderAPI {
   baseUrl = 'BASE_URL';
