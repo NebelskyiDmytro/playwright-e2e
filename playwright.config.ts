@@ -41,9 +41,20 @@ export default defineConfig({
       testMatch: 'global.teardown.ts',
     },
     {
-      name: 'chromium',
+      name: 'ui',
       use: { ...devices['Desktop Chrome'] },
       dependencies: ['setup'],
+    },
+    {
+      name: 'api',
+      testMatch: '**.api.ts',
+      use: {
+        baseURL: 'https://dummyjson.com',
+        headless: true,
+        trace: 'off',
+        screenshot: 'off',
+        video: 'off',
+      },
     },
   ],
 });
