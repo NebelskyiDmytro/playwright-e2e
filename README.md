@@ -45,25 +45,48 @@ npx playwright show-report
 
 ## 📁 Project Structure
 
+- `api/`
+  - `placeholder.api.ts` — API endpoint definitions and configurations
+- `components/`
+  - `AbstractComponent.ts` — Abstract base class for UI components
+- `config/`
+  - `timeouts.ts` — Centralized timeout configurations
+- `data/` — Test data files and datasets
 - `factory/`
   - `UserFactory.ts` — Factory for generating user test data
 - `fixtures/`
   - `fixture-pom.ts` — Playwright fixtures for Page Object Model setup
-- `playwright.config.ts` — Playwright configuration file
+- `global.setup.ts` — Global test setup configuration
+- `global.teardown.ts` — Global test teardown configuration
 - `pom/` — Page Object Model implementation
   - `BasePage.ts` — Base class for all page objects
   - `PageManager.ts` — Central manager for page objects
   - `pages/`
     - `samplePage.ts` — Example page object
 - `tests/` — Test specifications
-  - `API/` — API test specs (add your API tests here)
+  - `API/` — API test specs
+    - `sample.api.ts` — Example API test
   - `UI/` — UI/E2E test specs
     - `sample.spec.ts` — Example UI test
-- `types/`
-  - `user.d.ts` — TypeScript type definitions for user data
-- `utils/`
+- `types/` — TypeScript type definitions
+  - `enums/`
+    - `logger.ts` — Logger enumeration types
+    - `rest.ts` — REST API enumeration types
+  - `types/`
+    - `api.d.ts` — API-related type definitions
+    - `post.d.ts` — Post-related type definitions
+    - `user.d.ts` — User data type definitions
+- `utils/` — Utility functions and helpers
+  - `api/`
+    - `api.helpers.ts` — API testing helper functions
   - `generators/`
     - `dataGenerator.ts` — Utility for generating random or dynamic test data
+  - `logger/`
+    - `logger.ts` — Logging utility functions
+  - `runner/`
+    - `sharedPage.ts` — Shared page state management utilities
+- `playwright.config.ts` — Playwright configuration file
+- `tsconfig.json` — TypeScript configuration
 - `package.json` — Project dependencies and scripts
 
 ---
