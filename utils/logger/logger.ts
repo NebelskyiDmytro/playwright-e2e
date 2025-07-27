@@ -15,6 +15,14 @@ export class Logger {
     console.log(chalk.red(`[${LogType.Error}]`), message);
   }
 
+  static error_page_error(message: string) {
+    console.log(chalk.red(`[${LogType.Error}] Page error: ${message}`));
+  }
+
+  static error_request_failed(message: string) {
+    console.log(chalk.red(`[${LogType.Error}] Request failed: ${message}`));
+  }
+
   static debug(message: string) {
     console.log(chalk.green(`[${LogType.Debug}]`), message);
   }
@@ -64,10 +72,10 @@ export class Logger {
   static setupPageErrorHandler(page: Page) {
     if (process.env.LOG_PAGE_ERROR === 'true') {
       page.on('pageerror', (exception) => {
-        Logger.error(`Uncaught exception: "${exception}"`);
+        Logger.error_page_error(exception.message);
       });
     }
-    if (process.env.THROW_PAGE_ERROR === 'true') {
+    if (process.env.THROW_ON_PAGE_ERROR === 'true') {
       page.on('pageerror', (exception) => {
         throw new Error(`Uncaught exception: "${exception.message}"`);
       });
@@ -81,7 +89,7 @@ export class Logger {
   static setupRequestFailedHandler(page: Page) {
     if (process.env.LOG_REQUEST_FAILED === 'true') {
       page.on('requestfailed', (request) => {
-        Logger.error(`Request failed: ${request.url()} - ${request.failure()?.errorText}`);
+        Logger.error_request_failed(`${request.url()} - ${request.failure()?.errorText}`);
       });
     }
   }

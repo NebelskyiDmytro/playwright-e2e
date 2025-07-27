@@ -6,6 +6,7 @@ import { Logger } from '../utils/logger/logger';
 export const test = base.extend<{
   pm: PageManager;
   page: BasePage;
+  logger: Logger;
 }>({
   // Here we are creating a new instance of PageManager in order to simplify access to the POM
   pm: [
@@ -16,11 +17,18 @@ export const test = base.extend<{
     { auto: true },
   ],
 
+  logger: [
+    async ({ page }, use) => {
+      // Here we are logging the browser console messages to the console
+      Logger.setupConsoleHandler(page);
+      Logger.setupPageErrorHandler(page);
+      Logger.setupRequestFailedHandler(page);
+      await use(Logger);
+    },
+    { auto: true },
+  ],
+
   page: async ({ page }, use) => {
-    // Here we are logging the browser console messages to the console
-    Logger.setupConsoleHandler(page);
-    Logger.setupPageErrorHandler(page);
-    Logger.setupRequestFailedHandler(page);
     await use(page);
   },
 });
