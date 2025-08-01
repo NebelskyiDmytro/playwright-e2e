@@ -17,7 +17,7 @@ export class BasePage {
     await locator.scrollIntoViewIfNeeded();
   }
 
-    /**
+  /**
    * Returns a locator that finds elements containing specific text in the class name attribute.
    *
    * **Usage**
@@ -61,7 +61,7 @@ export class BasePage {
 
   async assertUrlContains(partial: string): Promise<void> {
     try {
-      await expect(this.page).toHaveURL(new RegExp(partial));
+      await expect(this.page).toHaveURL(partial);
     } catch (error) {
       Logger.error(`URL does not contain: ${partial}`);
       throw error;

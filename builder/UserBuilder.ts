@@ -3,12 +3,12 @@ import { IUser } from '../types/types/user.d';
 export class UserBuilder {
   private user: Partial<IUser> = {};
 
-  withFirstName(firstName: string): this {
+  setFirstName(firstName: string): this {
     this.user.firstName = firstName;
     return this;
   }
 
-  withLastName(lastName: string): this {
+  setLastName(lastName: string): this {
     this.user.lastName = lastName;
     return this;
   }
