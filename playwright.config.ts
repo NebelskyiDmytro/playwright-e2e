@@ -26,6 +26,7 @@ export default defineConfig({
     trace: 'on',
     screenshot: process.env.CI ? 'only-on-failure' : 'on',
     video: process.env.CI ? 'retain-on-failure' : 'on',
+    actionTimeout: 5000,
   },
 
   projects: [
