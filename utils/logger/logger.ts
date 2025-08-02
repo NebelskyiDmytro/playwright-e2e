@@ -3,36 +3,44 @@ import { Page } from '@playwright/test';
 import { BrowseConsole, LogType } from '../../types/enums/logger';
 
 export class Logger {
-  static info(message: string) {
-    console.log(chalk.blue(`[${LogType.Info}]`), message);
+  private static logMessage(type: LogType, message: string, color: (text: string) => string, summary?: string) {
+    if (summary) {
+      console.log(color(`[${type}]`), summary, color(message));
+    } else {
+      console.log(color(`[${type}]`), message);
+    }
   }
 
-  static warn(message: string) {
-    console.log(chalk.yellow(`[${LogType.Warn}]`), message);
+  static info(message: string, summary?: string) {
+    Logger.logMessage(LogType.Info, message, chalk.blue, summary);
   }
 
-  static error(message: string) {
-    console.log(chalk.red(`[${LogType.Error}]`), message);
+  static warn(message: string, summary?: string) {
+    Logger.logMessage(LogType.Warn, message, chalk.yellow, summary);
   }
 
-  static error_page_error(message: string) {
-    console.log(chalk.red(`[${LogType.Error}] Page error: ${message}`));
+  static error(message: string, summary?: string) {
+    Logger.logMessage(LogType.Error, message, chalk.red, summary);
   }
 
-  static error_request_failed(message: string) {
-    console.log(chalk.red(`[${LogType.Error}] Request failed: ${message}`));
+  static errorPageError(message: string) {
+    Logger.logMessage(LogType.Error, message, chalk.red, 'Page error:');
   }
 
-  static debug(message: string) {
-    console.log(chalk.green(`[${LogType.Debug}]`), message);
+  static errorRequestFailed(message: string) {
+    Logger.logMessage(LogType.Error, message, chalk.red, 'Request failed:');
   }
 
-  static log(message: string) {
-    console.log(chalk.cyan(`[${LogType.Log}]`), message);
+  static debug(message: string, summary?: string) {
+    Logger.logMessage(LogType.Debug, message, chalk.green, summary);
   }
 
-  static navigation(url: string) {
-    console.log(`[${LogType.Navigation}] URL: ${chalk.blue(url)}`);
+  static log(message: string, summary?: string) {
+    Logger.logMessage(LogType.Log, message, chalk.cyan, summary);
+  }
+
+  static navigation(url: string, summary?: string) {
+    Logger.logMessage(LogType.Navigation, `URL: ${chalk.blue(url)}`, chalk.blue, summary);
   }
 
   /*
@@ -72,7 +80,7 @@ export class Logger {
   static setupPageErrorHandler(page: Page) {
     if (process.env.LOG_PAGE_ERROR === 'true') {
       page.on('pageerror', (exception) => {
-        Logger.error_page_error(exception.message);
+        Logger.errorPageError(exception.message);
       });
     }
     if (process.env.THROW_ON_PAGE_ERROR === 'true') {
@@ -89,7 +97,7 @@ export class Logger {
   static setupRequestFailedHandler(page: Page) {
     if (process.env.LOG_REQUEST_FAILED === 'true') {
       page.on('requestfailed', (request) => {
-        Logger.error_request_failed(`${request.url()} - ${request.failure()?.errorText}`);
+        Logger.errorRequestFailed(`${request.url()} - ${request.failure()?.errorText}`);
       });
     }
   }
