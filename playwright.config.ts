@@ -43,8 +43,12 @@ export default defineConfig({
     },
     {
       name: 'ui',
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+        ...devices['Desktop Chrome'],
+        viewport: { width: 1920, height: 1080 },
+      },
       dependencies: ['setup'],
+      snapshotPathTemplate: './tests/screenshots/{testName}/{arg}{ext}',
     },
     {
       name: 'api',
