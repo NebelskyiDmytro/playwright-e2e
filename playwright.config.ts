@@ -7,7 +7,7 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: 1,
-  reporter: [['list'], ['allure-playwright'], ['html']],
+  reporter: [['html']],
   timeout: 60000,
 
   expect: {
@@ -26,7 +26,8 @@ export default defineConfig({
     trace: 'on',
     screenshot: process.env.CI ? 'only-on-failure' : 'on',
     video: process.env.CI ? 'retain-on-failure' : 'on',
-    actionTimeout: 5000,
+    navigationTimeout: 10000,
+    actionTimeout: 10000,
   },
 
   projects: [

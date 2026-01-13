@@ -20,7 +20,7 @@ A minimal, modular Playwright framework for end-to-end (E2E) browser automation 
 - Test data generation utilities
 - Factory pattern for test data
 - Fixtures for test setup
-- HTML, Allure reporting
+- HTML reporting
 
 ---
 
