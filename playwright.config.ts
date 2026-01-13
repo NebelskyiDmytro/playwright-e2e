@@ -22,7 +22,7 @@ export default defineConfig({
 
   use: {
     // baseURL: 'http://localhost:3000',
-    headless: process.env.CI ? true : false,
+    headless: true,
     trace: 'on',
     screenshot: process.env.CI ? 'only-on-failure' : 'on',
     video: process.env.CI ? 'retain-on-failure' : 'on',
