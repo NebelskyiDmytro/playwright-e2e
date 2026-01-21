@@ -5,7 +5,7 @@ dotenv.config({ path: '.env-example', quiet: true });
 export default defineConfig({
   testDir: './tests',
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
+  retries: process.env.CI ? 1 : 0,
   workers: 1,
   reporter: [['html']],
   timeout: 60000,
@@ -48,8 +48,8 @@ export default defineConfig({
         ...devices['Desktop Chrome'],
         viewport: { width: 1920, height: 1080 },
       },
-      dependencies: ['setup'],
-      snapshotPathTemplate: './tests/screenshots/{testName}/{arg}{ext}',
+      //dependencies: ['setup'],
+      snapshotPathTemplate: './src/screenshots/{testName}/{arg}{ext}',
     },
     {
       name: 'api',

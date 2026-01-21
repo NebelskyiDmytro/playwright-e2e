@@ -1,5 +1,10 @@
 import { IUser } from '../types/types/user.d';
 
+const DEFAULT_USER: IUser = {
+  firstName: 'John',
+  lastName: 'Doe',
+};
+
 export class UserBuilder {
   private user: Partial<IUser> = {};
 
@@ -15,8 +20,8 @@ export class UserBuilder {
 
   build(): IUser {
     return {
-      firstName: this.user.firstName ?? '',
-      lastName: this.user.lastName ?? '',
+      ...DEFAULT_USER,
+      ...this.user,
     };
   }
 }
