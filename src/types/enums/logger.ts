@@ -1,10 +1,10 @@
 export const enum LogType {
-  Info = 'INFO',
-  Warn = 'WARN',
-  Error = 'ERROR',
-  Debug = 'DEBUG',
-  Log = 'LOG',
-  Navigation = 'NAVIGATION',
+  Info = '[INFO] -',
+  Warn = '[WARN] -',
+  Error = '[ERROR] -',
+  Debug = '[DEBUG] -',
+  Log = '[LOG] -',
+  Navigation = '[NAVIGATION] -',
 }
 
 export const enum BrowseConsole {

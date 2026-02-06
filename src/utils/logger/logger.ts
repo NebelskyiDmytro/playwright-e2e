@@ -3,44 +3,40 @@ import { Page } from '@playwright/test';
 import { BrowseConsole, LogType } from '../../types/enums/logger';
 
 export class Logger {
-  private static logMessage(type: LogType, message: string, color: (text: string) => string, summary?: string) {
-    if (summary) {
-      console.log(color(`[${type}]`), summary, color(message));
-    } else {
-      console.log(color(`[${type}]`), message);
-    }
+  private static logMessage(type: LogType, message: string) {
+    console.log(`[${type}]`, message);
   }
 
-  static info(message: string, summary?: string) {
-    Logger.logMessage(LogType.Info, message, chalk.blue, summary);
+  static info(message: string) {
+    Logger.logMessage(LogType.Info, message);
   }
 
-  static warn(message: string, summary?: string) {
-    Logger.logMessage(LogType.Warn, message, chalk.yellow, summary);
+  static warn(message: string) {
+    Logger.logMessage(LogType.Warn, message);
   }
 
-  static error(message: string, summary?: string) {
-    Logger.logMessage(LogType.Error, message, chalk.red, summary);
+  static error(message: string) {
+    Logger.logMessage(LogType.Error, message);
   }
 
   static errorPageError(message: string) {
-    Logger.logMessage(LogType.Error, message, chalk.red, 'Page error:');
+    Logger.logMessage(LogType.Error, message);
   }
 
   static errorRequestFailed(message: string) {
-    Logger.logMessage(LogType.Error, message, chalk.red, 'Request failed:');
+    Logger.logMessage(LogType.Error, message);
   }
 
-  static debug(message: string, summary?: string) {
-    Logger.logMessage(LogType.Debug, message, chalk.green, summary);
+  static debug(message: string) {
+    Logger.logMessage(LogType.Debug, message);
   }
 
-  static log(message: string, summary?: string) {
-    Logger.logMessage(LogType.Log, message, chalk.cyan, summary);
+  static log(message: string) {
+    Logger.logMessage(LogType.Log, message);
   }
 
-  static navigation(url: string, summary?: string) {
-    Logger.logMessage(LogType.Navigation, `URL: ${chalk.blue(url)}`, chalk.blue, summary);
+  static navigation(url: string) {
+    Logger.logMessage(LogType.Navigation, `URL: ${url}`);
   }
 
   /*
